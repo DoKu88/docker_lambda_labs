@@ -1,3 +1,5 @@
+Notes for using Docker on Lambda Labs with large tar's since Dockerfile COPY command creates a layer & costs memory & time. 
+
 ========================================
 GOOD COMMANDS: 06/07/2025
 ========================================
@@ -5,8 +7,11 @@ GOOD COMMANDS: 06/07/2025
 MUST RUN every new instance:
 --------------------------------
 sudo usermod -aG docker $USER
+
 newgrp docker
+
 sudo nvidia-ctk runtime configure --runtime=docker
+
 sudo systemctl restart docker
 
 
@@ -20,9 +25,11 @@ This saves us a lot of TIME & MEMORY since we're not storing the tar within a la
 -----------------------------------------------------------------------------------
 
 cd ./server
+
 docker run -d -p 8000:8000 -v ./tars:/data my-python-server
 
 cd ../setup/app
+
 docker build --no-cache --network=host -t sonic_07_14_2025.
 
 docker run -it --rm --runtime=nvidia --gpus all \
