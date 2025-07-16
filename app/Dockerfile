@@ -52,6 +52,10 @@ RUN curl -O http://127.0.0.1:8000/nerfstudio.tar && \
 RUN curl -O http://127.0.0.1:8000/hoist.tar && \ 
     tar -xvf hoist.tar -C /home/ubuntu/miniconda3/envs/hoist --strip-components=1 && \
     rm /home/ubuntu/hoist.tar 
+
+RUN curl -O http://127.0.0.1:8000/hoist2.tar && \ 
+    tar -xvf hoist2.tar -C /home/ubuntu/miniconda3/envs/hoist2 --strip-components=1 && \
+    rm /home/ubuntu/hoist2.tar 
 # =============================================================================================
 
 RUN conda config --append envs_dirs /home/ubuntu/miniconda3/envs
