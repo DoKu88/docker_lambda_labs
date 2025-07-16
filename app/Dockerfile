@@ -7,6 +7,7 @@ WORKDIR /home/ubuntu
 
 # 3. Copy all necessary files (no tar's to keep down bloat)
 COPY Miniconda3-latest-Linux-x86_64.sh /home/ubuntu/
+COPY .vimrc /root
 
 # 4. Install dependencies and Miniconda
 RUN apt-get update && apt-get install -y \
@@ -37,6 +38,7 @@ RUN echo "source /home/ubuntu/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc
 RUN mkdir -p /home/ubuntu/miniconda3/envs/nerfstudio
 RUN mkdir -p /home/ubuntu/miniconda3/envs/robodiff
 RUN mkdir -p /home/ubuntu/miniconda3/envs/feature_splatting2
+RUN mkdir -p /home/ubuntu/miniconda3/envs/hoist
 
 RUN curl -O http://127.0.0.1:8000/nerfstudio.tar && \
     curl -O http://127.0.0.1:8000/robodiff.tar && \
@@ -45,6 +47,11 @@ RUN curl -O http://127.0.0.1:8000/nerfstudio.tar && \
     tar -xvf robodiff.tar -C /home/ubuntu/miniconda3/envs/robodiff && \
     tar -xvf feature_splatting2.tar -C /home/ubuntu/miniconda3/envs/feature_splatting2 --strip-components=1 && \
     rm /home/ubuntu/nerfstudio.tar && rm /home/ubuntu/robodiff.tar && rm /home/ubuntu/feature_splatting2.tar 
+
+
+RUN curl -O http://127.0.0.1:8000/hoist.tar && \ 
+    tar -xvf hoist.tar -C /home/ubuntu/miniconda3/envs/hoist --strip-components=1 && \
+    rm /home/ubuntu/hoist.tar 
 # =============================================================================================
 
 RUN conda config --append envs_dirs /home/ubuntu/miniconda3/envs
